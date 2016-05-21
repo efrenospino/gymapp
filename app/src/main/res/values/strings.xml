@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">GymApp</string>
+    <string name="usernameText">Username</string>
+    <string name="passwordText">Password</string>
+    <string name="loginText">LOGIN</string>
+    <string name="signupText">SIGN UP</string>
+    <string name="passwordAgainText">Password, again</string>
+    <string name="nameText">First Name</string>
+    <string name="lastNameText">Last Name</string>
+    <string name="orText">Or, if you don\'t have an account</string>
+    <string name="addressText">Address</string>
+    <string name="trainersText">Trainers</string>
+    <string name="clientsText">Clients</string>
+    <string name="machinesText">Machines</string>
+    <string name="schedulesText">Schedules</string>
+</resources>
