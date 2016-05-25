@@ -10,4 +10,5 @@
     <color name="divider">#B6B6B6</color>
     <color name="login">#00c853</color>
     <color name="signup">#fafafa</color>
+    <color name="cancel">#f44336</color>
 </resources>

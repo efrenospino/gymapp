@@ -1,16 +1,35 @@
 <resources>
+    <string name="landing_descripcion">GymApp es la aplicacion que te permite registrarte en el
+        gimnasio y apartar horas de entrenamiento con su entrenador favorito
+    </string>
     <string name="app_name">GymApp</string>
-    <string name="usernameText">Username</string>
-    <string name="passwordText">Password</string>
+    <string name="usernameText">Nombre de usuario</string>
+    <string name="passwordText">Contraseña</string>
     <string name="loginText">LOGIN</string>
     <string name="signupText">SIGN UP</string>
-    <string name="passwordAgainText">Password, again</string>
-    <string name="nameText">First Name</string>
-    <string name="lastNameText">Last Name</string>
-    <string name="orText">Or, if you don\'t have an account</string>
-    <string name="addressText">Address</string>
-    <string name="trainersText">Trainers</string>
-    <string name="clientsText">Clients</string>
-    <string name="machinesText">Machines</string>
-    <string name="schedulesText">Schedules</string>
+    <string name="passwordAgainText">Contraseña, de nuevo</string>
+    <string name="nameText">Nombre</string>
+    <string name="lastNameText">Apellido</string>
+    <string name="orText">O, si no tienes ninguna cuenta</string>
+    <string name="addressText">Dirección</string>
+    <string name="entrenadores">Entrenadores</string>
+    <string name="clientes">Clientes</string>
+    <string name="machinesText">Máquinas</string>
+    <string name="schedulesText">Horarios</string>
+    <string name="homeText">Home</string>
+    <string name="search">BUSCAR</string>
+    <string name="identificacion">Número de identificación</string>
+    <string name="fecha_nacimiento">Fecha de nacimiento</string>
+    <string name="peso">Peso</string>
+    <string name="estatura">Estatura</string>
+    <string name="guardar">GUARDAR</string>
+    <string name="limpiar">LIMPIAR</string>
+    <string name="cancelar">CANCELAR</string>
+    <string name="crear_cliente">Nuevo Cliente</string>
+    <string name="cliente_guardado">Cliente guardado!</string>
+    <string name="editar">Editar</string>
+    <string name="eliminar">ELIMINAR</string>
+    <string name="confirmacion">Confirmación</string>
+    <string name="seguro_de_eliminar">¿Está seguro(a) de eliminar el elemento?</string>
+    <string name="editar_cliente">Editar Cliente</string>
 </resources>

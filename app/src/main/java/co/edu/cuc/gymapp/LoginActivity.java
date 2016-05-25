@@ -12,8 +12,6 @@ import butterknife.ButterKnife;
 
 public class LoginActivity extends AppCompatActivity {
 
-    @BindView(R.id.loginToolbar)
-    Toolbar mToolbar;
     @BindView(R.id.loginButton)
     Button mLoginButton;
 
@@ -24,14 +22,10 @@ public class LoginActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        mToolbar.setTitle(getResources().getString(R.string.loginText));
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                startActivity(new Intent(LoginActivity.this, PrincipalActivity.class));
                 finish();
             }
         });

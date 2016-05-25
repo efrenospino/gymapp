@@ -17,11 +17,19 @@
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:theme="@style/NoActionBarTheme">
+            android:theme="@style/LoginTheme">
         </activity>
         <activity android:name=".SignupActivity">
         </activity>
-        <activity android:name=".HomeActivity">
+        <activity android:name=".PrincipalActivity">
+        </activity>
+        <activity android:name=".ListaEntrenadoresActivity">
+        </activity>
+        <activity android:name=".ListaClientesActivity">
+        </activity>
+        <activity android:name=".CrearClienteActivity">
+        </activity>
+        <activity android:name=".DetalleUsuarioActivity">
         </activity>
     </application>
 
