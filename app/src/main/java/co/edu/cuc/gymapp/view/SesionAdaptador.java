@@ -12,47 +12,47 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.edu.cuc.gymapp.R;
-import co.edu.cuc.gymapp.model.Horario;
+import co.edu.cuc.gymapp.model.Sesion;
 
-public class HorarioAdaptador extends RecyclerView.Adapter<HorarioAdaptador.HomeItemViewHolder> {
+public class SesionAdaptador extends RecyclerView.Adapter<SesionAdaptador.HomeItemViewHolder> {
 
-    private List<Horario> mHorarios = new ArrayList<>();
-    private OnHorarioClickListener mOnHorarioClickListener;
+    private List<Sesion> mSesiones = new ArrayList<>();
+    private OnSesionClickListener mOnSesionClickListener;
     private Context mContext;
 
-    public HorarioAdaptador(OnHorarioClickListener onHorarioClickListener, Context context, List<Horario> horarios) {
-        mOnHorarioClickListener = onHorarioClickListener;
+    public SesionAdaptador(OnSesionClickListener onSesionClickListener, Context context, List<Sesion> sesiones) {
+        mOnSesionClickListener = onSesionClickListener;
         mContext = context;
-        mHorarios = horarios;
+        mSesiones = sesiones;
     }
 
     @Override
     public HomeItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_custom_horario, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_custom_sesion, parent, false);
         return new HomeItemViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final HomeItemViewHolder holder, final int position) {
-        holder.mHoraInicioTextView.setText(String.valueOf(mHorarios.get(position).getHoraInicio()));
-        holder.mHoraFinTextView.setText(String.valueOf(mHorarios.get(position).getHoraFin()));
+        holder.mHoraInicioTextView.setText(String.valueOf(mSesiones.get(position).getHoraInicio()));
+        holder.mHoraFinTextView.setText(String.valueOf(mSesiones.get(position).getHoraFin()));
         holder.mEliminarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mOnHorarioClickListener.onEliminarHorarioItemClickListener(position);
+                mOnSesionClickListener.onEliminarSesionItemClickListener(position);
             }
         });
         holder.mEditarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mOnHorarioClickListener.onEditarHorarioItemClickListener(position);
+                mOnSesionClickListener.onEditarSesionItemClickListener(position);
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return mHorarios.size();
+        return mSesiones.size();
     }
 
     public static class HomeItemViewHolder extends RecyclerView.ViewHolder {
@@ -72,14 +72,14 @@ public class HorarioAdaptador extends RecyclerView.Adapter<HorarioAdaptador.Home
     }
 
     public void removeItemAt(int position) {
-        mHorarios.remove(position);
+        mSesiones.remove(position);
         notifyItemRemoved(position);
-        notifyItemRangeChanged(position, mHorarios.size());
+        notifyItemRangeChanged(position, mSesiones.size());
     }
 
-    public interface OnHorarioClickListener {
-        void onEliminarHorarioItemClickListener(Integer position);
-        void onEditarHorarioItemClickListener(Integer position);
+    public interface OnSesionClickListener {
+        void onEliminarSesionItemClickListener(Integer position);
+        void onEditarSesionItemClickListener(Integer position);
     }
 
 }

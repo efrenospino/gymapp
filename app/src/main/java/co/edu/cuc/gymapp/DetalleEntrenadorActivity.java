@@ -59,7 +59,7 @@ public class DetalleEntrenadorActivity extends AppCompatActivity implements View
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        Picasso.with(this).load(R.drawable.default_user).into(mImageView);
+        Picasso.with(this).load(R.drawable.gym_trainer).into(mImageView);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

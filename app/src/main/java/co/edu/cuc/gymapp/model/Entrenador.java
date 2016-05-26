@@ -9,18 +9,19 @@ import co.edu.cuc.gymapp.db.GymAppSQLiteOpenHelper;
 
 public class Entrenador {
 
-    private int mIdentificacion;
+    private String mIdentificacion;
     private String mNombre;
     private String mApellido;
     private int mPeso;
     private int mAltura;
     private String mFechaNacimiento;
     private int mId;
+    private int mGenero;
 
     public Entrenador() {
     }
 
-    public Entrenador(int identificacion, String nombre, String apellido, int peso, int altura, String fechaNacimiento, int id) {
+    public Entrenador(String identificacion, String nombre, String apellido, int peso, int altura, String fechaNacimiento, int id, int genero) {
         mIdentificacion = identificacion;
         mNombre = nombre;
         mApellido = apellido;
@@ -28,6 +29,7 @@ public class Entrenador {
         mAltura = altura;
         mFechaNacimiento = fechaNacimiento;
         mId = id;
+        mGenero = genero;
     }
 
     public String getNombre() {
@@ -70,11 +72,11 @@ public class Entrenador {
         mFechaNacimiento = fechaNacimiento;
     }
 
-    public int getIdentificacion() {
+    public String getIdentificacion() {
         return mIdentificacion;
     }
 
-    public void setIdentificacion(int identificacion) {
+    public void setIdentificacion(String identificacion) {
         mIdentificacion = identificacion;
     }
 
@@ -86,32 +88,47 @@ public class Entrenador {
         mId = id;
     }
 
-    public void guardar(Context contexto){
+    public void guardar(Context contexto) {
 
         GymAppSQLiteOpenHelper aux = new GymAppSQLiteOpenHelper(contexto);
         SQLiteDatabase db = aux.getWritableDatabase();
 
-        String sql = "INSERT INTO Entrenadores values('"+this.mNombre+"','"+this.mApellido+"','"+this.mIdentificacion+"','"+this.mFechaNacimiento+"','"+this.mPeso+"','"+this.mAltura +"')";
+        String sql = "INSERT INTO Entrenadores values('" + this.mNombre + "','" + this.mApellido + "','" + this.mIdentificacion + "','" + this.mFechaNacimiento
+                + "','" + this.mPeso + "','" + this.mAltura + "', " + this.mGenero + ")";
         db.execSQL(sql);
 
         db.close();
     }
 
-    public void editar(Context contexto){
+    public void editar(Context contexto) {
         GymAppSQLiteOpenHelper aux = new GymAppSQLiteOpenHelper(contexto);
         SQLiteDatabase db = aux.getWritableDatabase();
 
-        String sql = "UPDATE Entrenadores SET nombre='"+this.mNombre+"', apellido='"+this.mApellido+"', fecha_nacimiento='"+this.mFechaNacimiento+"', peso='"+this.mPeso+"', altura='"+this.mAltura+"' WHERE rowid='"+this.mId+"'";
+        String sql = "UPDATE Entrenadores SET nombre='" + this.mNombre + "', apellido='" + this.mApellido + "', fecha_nacimiento='" + this.mFechaNacimiento + "', peso='"
+                + this.mPeso + "', altura='" + this.mAltura + "', genero=" + this.mGenero + " WHERE rowid='" + this.mId + "'";
         db.execSQL(sql);
         db.close();
     }
 
-    public void eliminar(Context contexto){
+    public void eliminar(Context contexto) {
         GymAppSQLiteOpenHelper aux = new GymAppSQLiteOpenHelper(contexto);
-        SQLiteDatabase db  = aux.getWritableDatabase();
+        SQLiteDatabase db = aux.getWritableDatabase();
 
-        String sql = "DELETE FROM Entrenadores WHERE rowid='"+this.mId+"'";
+        String sql = "DELETE FROM Entrenadores WHERE rowid='" + this.mId + "'";
         db.execSQL(sql);
         db.close();
+    }
+
+    @Override
+    public String toString() {
+        return mNombre + " " + mApellido + ": " + mIdentificacion;
+    }
+
+    public int getGenero() {
+        return mGenero;
+    }
+
+    public void setGenero(int genero) {
+        mGenero = genero;
     }
 }

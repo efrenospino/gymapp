@@ -1,6 +1,6 @@
 <resources>
-    <string name="landing_descripcion">GymApp es la aplicacion que te permite registrarte en el
-        gimnasio y apartar horas de entrenamiento con su entrenador favorito
+    <string name="landing_descripcion">GymApp es la aplicacion que te permite llevar el control de tu gimnasio,
+        gestionando los sesiones de las sesiones de entrenamiento para cada cliente.
     </string>
     <string name="app_name">GymApp</string>
     <string name="usernameText">Nombre de usuario</string>
@@ -15,7 +15,7 @@
     <string name="entrenadores">Entrenadores</string>
     <string name="clientes">Clientes</string>
     <string name="machinesText">Máquinas</string>
-    <string name="schedulesText">Horarios</string>
+    <string name="sesionesText">Sesiones</string>
     <string name="homeText">Home</string>
     <string name="search">BUSCAR</string>
     <string name="identificacion">Número de identificación</string>
@@ -37,8 +37,15 @@
     <string name="crear_entrenador">Nuevo Entrenador</string>
     <string name="hora_inicio">Inicio</string>
     <string name="hora_fin">Fin</string>
-    <string name="horarios">Horarios</string>
-    <string name="crear_horario">Nuevo Horario</string>
-    <string name="editar_horario">Editar Horario</string>
-    <string name="horario_guardado">Horario Guardado!</string>
+    <string name="sesiones">@string/sesionesText</string>
+    <string name="crear_sesion">Nueva Sesion</string>
+    <string name="editar_sesion">Editar Sesion</string>
+    <string name="sesion_guardado">Sesion guardada!</string>
+    <string name="cliente">Cliente</string>
+    <string name="entrenador">Entrenador</string>
+    <string name="completada">Completada</string>
+    <string name="genero">Género</string>
+    <string name="masculino">Masculino</string>
+    <string name="femenino">Femenino</string>
+    <string name="llene_campos">Llene todos los campos, por favor.</string>
 </resources>

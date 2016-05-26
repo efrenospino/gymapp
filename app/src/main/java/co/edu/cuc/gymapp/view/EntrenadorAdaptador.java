@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +36,7 @@ public class EntrenadorAdaptador extends RecyclerView.Adapter<EntrenadorAdaptado
 
     @Override
     public void onBindViewHolder(final HomeItemViewHolder holder, final int position) {
+        Picasso.with(mContext).load(R.drawable.trainer).fit().centerInside().into(holder.mImageView);
         holder.mLargeTextView.setText(mEntrenadores.get(position).getNombre() + " " + mEntrenadores.get(position).getApellido());
         holder.mMediumTextView.setText(String.valueOf(mEntrenadores.get(position).getIdentificacion()));
         holder.mSmallTextView.setText(mEntrenadores.get(position).getAltura() + "cm - " + mEntrenadores.get(position).getPeso() + "Kg");

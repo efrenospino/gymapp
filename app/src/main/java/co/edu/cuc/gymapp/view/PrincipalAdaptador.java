@@ -26,8 +26,8 @@ public class PrincipalAdaptador extends RecyclerView.Adapter<PrincipalAdaptador.
     public PrincipalAdaptador(OnHomeListItemClickListener onHomeListItemClickListener, Context context) {
         mOnHomeListItemClickListener = onHomeListItemClickListener;
         mContext = context;
-        mHomeItemTexts.addAll(Arrays.asList(R.string.entrenadores, R.string.clientes, R.string.schedulesText, R.string.machinesText));
-        mHomeItemImages.addAll(Arrays.asList(R.drawable.gym_trainer, R.drawable.gym_clients, R.drawable.schedule_image, R.drawable.gym_equipment));
+        mHomeItemTexts.addAll(Arrays.asList(R.string.entrenadores, R.string.clientes, R.string.sesionesText));
+        mHomeItemImages.addAll(Arrays.asList(R.drawable.gym_trainer, R.drawable.gym_clients, R.drawable.schedule_image));
     }
 
     @Override

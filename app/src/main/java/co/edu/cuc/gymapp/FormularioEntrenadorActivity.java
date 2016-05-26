@@ -7,11 +7,14 @@ import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import butterknife.BindView;
@@ -41,6 +44,8 @@ public class FormularioEntrenadorActivity extends AppCompatActivity {
     TextInputEditText mPesoTextView;
     @BindView(R.id.txtEstaturaCliente)
     TextInputEditText mEstaturaTextView;
+    @BindView(R.id.radioGroupGenero)
+    RadioGroup mRadioGroup;
 
     private int year, month, day;
     static final int DATE_DIALOG_ID = 999;
@@ -52,7 +57,6 @@ public class FormularioEntrenadorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_formulario_usuario);
 
         ButterKnife.bind(this);
-
 
 
         if (getIntent().getExtras() != null) {
@@ -117,6 +121,7 @@ public class FormularioEntrenadorActivity extends AppCompatActivity {
                     onBackPressed();
                 }
             });
+            ((RadioButton) findViewById(R.id.radioMasculino)).setChecked(true);
         }
 
 
@@ -133,28 +138,49 @@ public class FormularioEntrenadorActivity extends AppCompatActivity {
     }
 
     private void actualizar() {
-        String nombre, apellido, cumpleaños, peso, estatura;
+        String nombre, apellido, cumpleaños, peso, estatura, cedula;
+        int genero;
 
         nombre = mNombreTextView.getText().toString().trim();
         apellido = mApellidoTextView.getText().toString().trim();
         cumpleaños = mFechaNacimientoTextView.getText().toString().trim();
         peso = mPesoTextView.getText().toString().trim();
         estatura = mEstaturaTextView.getText().toString().trim();
+        genero = mRadioGroup.getCheckedRadioButtonId();
+        cedula = mCedulaTextView.getText().toString().trim();
 
-        mEntrenador.setNombre(nombre);
-        mEntrenador.setApellido(apellido);
-        mEntrenador.setPeso(Integer.parseInt(peso));
-        mEntrenador.setAltura(Integer.parseInt(estatura));
-        mEntrenador.setFechaNacimiento(cumpleaños);
 
-        mEntrenador.editar(this);
+        if (validar(cedula, nombre, apellido, cumpleaños, peso, estatura)) {
 
-        Toast.makeText(this, getString(R.string.entrenador_guardado), Toast.LENGTH_SHORT).show();
+            mEntrenador.setNombre(nombre);
+            mEntrenador.setApellido(apellido);
+            mEntrenador.setPeso(Integer.parseInt(peso));
+            mEntrenador.setAltura(Integer.parseInt(estatura));
+            mEntrenador.setFechaNacimiento(cumpleaños);
 
-        Intent i = new Intent(this, DetalleEntrenadorActivity.class);
-        i.putExtra("ENTRENADOR_ID", mEntrenador.getId());
-        startActivity(i);
-        finish();
+            int generoid = 0;
+            switch (genero) {
+                case R.id.radioMasculino:
+                    generoid = 1;
+                    break;
+                case R.id.radioFemenino:
+                    generoid = 0;
+                    break;
+            }
+
+            mEntrenador.setGenero(generoid);
+            mEntrenador.editar(this);
+
+            Toast.makeText(this, getString(R.string.entrenador_guardado), Toast.LENGTH_SHORT).show();
+
+            Intent i = new Intent(this, DetalleEntrenadorActivity.class);
+            i.putExtra("ENTRENADOR_ID", mEntrenador.getId());
+            startActivity(i);
+            finish();
+
+        } else {
+            Toast.makeText(this, getString(R.string.llene_campos), Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void rellenarFormulario() {
@@ -167,6 +193,15 @@ public class FormularioEntrenadorActivity extends AppCompatActivity {
         mFechaNacimientoTextView.setText(mEntrenador.getFechaNacimiento());
         mPesoTextView.setText(String.valueOf(mEntrenador.getPeso()));
         mEstaturaTextView.setText(String.valueOf(mEntrenador.getAltura()));
+
+        switch (mEntrenador.getGenero()) {
+            case 1:
+                ((RadioButton) findViewById(R.id.radioMasculino)).setChecked(true);
+                break;
+            case 0:
+                ((RadioButton) findViewById(R.id.radioFemenino)).setChecked(true);
+                break;
+        }
     }
 
     private DatePickerDialog.OnDateSetListener datePickerListener
@@ -187,6 +222,7 @@ public class FormularioEntrenadorActivity extends AppCompatActivity {
 
     public void guardar() {
         String nombre, apellido, cedula, cumpleaños, peso, estatura;
+        int genero;
 
         nombre = mNombreTextView.getText().toString().trim();
         apellido = mApellidoTextView.getText().toString().trim();
@@ -194,15 +230,31 @@ public class FormularioEntrenadorActivity extends AppCompatActivity {
         cumpleaños = mFechaNacimientoTextView.getText().toString().trim();
         peso = mPesoTextView.getText().toString().trim();
         estatura = mEstaturaTextView.getText().toString().trim();
+        genero = mRadioGroup.getCheckedRadioButtonId();
 
-        Entrenador c = new Entrenador(Integer.valueOf(cedula), nombre, apellido,
-                Integer.valueOf(peso), Integer.valueOf(estatura), cumpleaños, 0);
+        if (validar(cedula, nombre, apellido, cumpleaños, peso, estatura)) {
 
-        c.guardar(this);
+            int generoid = 0;
+            switch (genero) {
+                case R.id.radioMasculino:
+                    generoid = 1;
+                    break;
+                case R.id.radioFemenino:
+                    generoid = 0;
+                    break;
+            }
 
-        Toast.makeText(this, getString(R.string.entrenador_guardado), Toast.LENGTH_SHORT).show();
+            Entrenador c = new Entrenador(cedula, nombre, apellido,
+                    Integer.parseInt(peso), Integer.parseInt(estatura), cumpleaños, 0, generoid);
 
-        onBackPressed();
+            c.guardar(this);
+
+            Toast.makeText(this, getString(R.string.entrenador_guardado), Toast.LENGTH_SHORT).show();
+
+            onBackPressed();
+        } else {
+            Toast.makeText(this, getString(R.string.llene_campos), Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -220,5 +272,11 @@ public class FormularioEntrenadorActivity extends AppCompatActivity {
                         1990, month, day);
         }
         return null;
+    }
+
+    public boolean validar(String identificacion, String nombre, String apellido, String fecha, String peso, String estatura) {
+        return !(TextUtils.isEmpty(nombre.trim()) | TextUtils.isEmpty(identificacion.trim())
+                | TextUtils.isEmpty(apellido.trim()) | TextUtils.isEmpty(fecha.trim()) | TextUtils.isEmpty(peso.trim())
+                | TextUtils.isEmpty(estatura.trim()));
     }
 }

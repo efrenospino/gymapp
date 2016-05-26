@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GymApp</string>
+    <string name="addressText">Address</string>
+    <string name="cancelar">CANCEL</string>
+    <string name="cliente">Customer</string>
+    <string name="cliente_guardado">Customer saved!</string>
+    <string name="clientes">Customers</string>
+    <string name="completada">Complete</string>
+    <string name="confirmacion">Confirmation</string>
+    <string name="crear_cliente">New Costumer</string>
+    <string name="crear_entrenador">New Trainer</string>
+    <string name="crear_sesion">New Session</string>
+    <string name="editar">Edit</string>
+    <string name="editar_cliente">Edit Customer</string>
+    <string name="editar_entrenador">Edit Trainer</string>
+    <string name="editar_sesion">Edit Session</string>
+    <string name="eliminar">DELETE</string>
+    <string name="entrenador">Trainer</string>
+    <string name="entrenador_guardado">Trainer saved!</string>
+    <string name="entrenadores">Trainers</string>
+    <string name="estatura">Height</string>
+    <string name="fecha_nacimiento">Date of birth</string>
+    <string name="femenino">Female</string>
+    <string name="genero">Gender</string>
+    <string name="guardar">SAVE</string>
+    <string name="homeText">Home</string>
+    <string name="hora_inicio">Begin</string>
+    <string name="hora_fin">End</string>
+    <string name="identificacion">Identification Number</string>
+    <string name="landing_descripcion">Gym App is the app that lets you take the control of your
+        gym, managing sessions training sessions for each customersx
+    </string>
+    <string name="lastNameText">Last Name</string>
+    <string name="limpiar">CLEAR</string>
+    <string name="masculino">Male</string>
+    <string name="nameText">First Name</string>
+    <string name="orText"></string>
+    <string name="peso">Weigth</string>
+    <string name="search"></string>
+    <string name="seguro_de_eliminar">Are you sure to delete the element?</string>
+    <string name="sesion_guardado">Session saved!</string>
+    <string name="sesiones">@string/sesionesText</string>
+    <string name="sesionesText">Sessions</string>
+    <string name="llene_campos">Fill all fields, please.</string>
+</resources>

@@ -27,5 +27,13 @@
 
     <style name="AppTheme.AppBarOverlay.Dark" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
-    <style name="AppTheme.PopupOverlay"  parent="ThemeOverlay.AppCompat.Light"></style>
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"></style>
+
+    <style name="TemaDetalle" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
 </resources>

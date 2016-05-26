@@ -41,6 +41,7 @@ public class DetalleUsuarioActivity extends AppCompatActivity implements View.On
     @BindView(R.id.eliminarButton)
     Button mEliminarButton;
 
+
     Cliente mCliente = new Cliente();
 
 
@@ -58,7 +59,7 @@ public class DetalleUsuarioActivity extends AppCompatActivity implements View.On
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        Picasso.with(this).load(R.drawable.default_user).into(mImageView);
+        Picasso.with(this).load(R.drawable.gym_clients).into(mImageView);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

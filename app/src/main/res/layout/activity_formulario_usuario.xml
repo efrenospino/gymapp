@@ -33,12 +33,14 @@
                       android:padding="16dp">
 
             <android.support.design.widget.TextInputLayout android:layout_width="match_parent"
+                                                           android:id="@+id/identificacionLayout"
                                                            android:layout_height="wrap_content">
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/txtCedulaCliente"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:maxLength="10"
                     android:ems="10"
                     android:hint="@string/identificacion"
                     android:inputType="number"/>
@@ -46,6 +48,7 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout android:layout_width="match_parent"
+                                                           android:id="@+id/nombreLayout"
                                                            android:layout_height="wrap_content">
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/txtNombreCliente"
@@ -59,6 +62,7 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout android:layout_width="match_parent"
+                                                           android:id="@+id/apellidoLayout"
                                                            android:layout_height="wrap_content">
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/txtApellidoCliente"
@@ -72,6 +76,7 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout android:layout_width="match_parent"
+                                                           android:id="@+id/fechaLayout"
                                                            android:layout_height="wrap_content">
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/txtCumpleañosCliente"
@@ -85,11 +90,13 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout android:layout_width="match_parent"
+                                                           android:id="@+id/pesoLayout"
                                                            android:layout_height="wrap_content">
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/txtPesoCliente"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:maxLength="10"
                     android:layout_marginTop="10dp"
                     android:ems="10"
                     android:hint="@string/peso"
@@ -98,6 +105,7 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout android:layout_width="match_parent"
+                                                           android:id="@+id/estaturaLayout"
                                                            android:layout_height="wrap_content">
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/txtEstaturaCliente"
@@ -106,9 +114,32 @@
                     android:layout_marginTop="10dp"
                     android:ems="10"
                     android:hint="@string/estatura"
+                    android:maxLength="10"
                     android:inputType="number"/>
 
             </android.support.design.widget.TextInputLayout>
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:layout_marginLeft="5dp"
+                      android:layout_marginTop="10dp"
+                      android:text="@string/genero"
+                      android:textSize="18sp"/>
+            <RadioGroup android:layout_width="match_parent"
+                        android:id="@+id/radioGroupGenero"
+                        android:layout_height="wrap_content">
+
+                <RadioButton android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:id="@+id/radioMasculino"
+                             android:layout_marginTop="10dp"
+                             android:text="@string/masculino"/>
+
+                <RadioButton android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:id="@+id/radioFemenino"
+                             android:layout_marginTop="10dp"
+                             android:text="@string/femenino"/>
+            </RadioGroup>
 
 
             <LinearLayout

@@ -7,23 +7,22 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-import co.edu.cuc.gymapp.ListaHorariosActivity;
 import co.edu.cuc.gymapp.model.Cliente;
 import co.edu.cuc.gymapp.model.Entrenador;
-import co.edu.cuc.gymapp.model.Horario;
+import co.edu.cuc.gymapp.model.Sesion;
 
 public class OrmHelper {
 
     public static ArrayList<Entrenador> traerEntrenadores(Context contexto) {
         SQLiteDatabase db;
         String sql, nombre, apellido, cedula, cumpleaños, peso, estatura;
-        int rowid;
+        int rowid, genero;
         ArrayList<Entrenador> entrenadores = new ArrayList<>();
 
         GymAppSQLiteOpenHelper aux = new GymAppSQLiteOpenHelper(contexto);
         db = aux.getReadableDatabase();
 
-        sql = "SELECT nombre, apellido, identificacion, fecha_nacimiento, peso, altura, rowid FROM Entrenadores";
+        sql = "SELECT nombre, apellido, identificacion, fecha_nacimiento, peso, altura, genero, rowid FROM Entrenadores";
 
         Cursor c = db.rawQuery(sql, null);
 
@@ -35,8 +34,9 @@ public class OrmHelper {
                 cumpleaños = c.getString(3);
                 peso = c.getString(4);
                 estatura = c.getString(5);
-                rowid = c.getInt(6);
-                Entrenador entrenador = new Entrenador(Integer.valueOf(cedula), nombre, apellido, Integer.valueOf(peso), Integer.valueOf(estatura), cumpleaños, rowid);
+                genero = c.getInt(6);
+                rowid = c.getInt(7);
+                Entrenador entrenador = new Entrenador(cedula, nombre, apellido, Integer.valueOf(peso), Integer.valueOf(estatura), cumpleaños, rowid, genero);
                 entrenadores.add(entrenador);
             } while (c.moveToNext());
         }
@@ -48,13 +48,13 @@ public class OrmHelper {
     public static ArrayList<Cliente> traerClientes(Context contexto) {
         SQLiteDatabase db;
         String sql, nombre, apellido, cedula, cumpleaños, peso, estatura;
-        int rowid;
+        int rowid, genero;
         ArrayList<Cliente> clientes = new ArrayList<>();
 
         GymAppSQLiteOpenHelper aux = new GymAppSQLiteOpenHelper(contexto);
         db = aux.getReadableDatabase();
 
-        sql = "SELECT nombre, apellido, identificacion, fecha_nacimiento, peso, altura, rowid FROM Clientes";
+        sql = "SELECT nombre, apellido, identificacion, fecha_nacimiento, peso, altura, genero, rowid FROM Clientes";
 
         Cursor c = db.rawQuery(sql, null);
 
@@ -66,8 +66,9 @@ public class OrmHelper {
                 cumpleaños = c.getString(3);
                 peso = c.getString(4);
                 estatura = c.getString(5);
-                rowid = c.getInt(6);
-                Cliente cliente = new Cliente(Integer.valueOf(cedula), nombre, apellido, Integer.valueOf(peso), Integer.valueOf(estatura), cumpleaños, rowid);
+                genero = Integer.parseInt(c.getString(6));
+                rowid = c.getInt(7);
+                Cliente cliente = new Cliente (cedula, nombre, apellido, Integer.valueOf(peso), Integer.valueOf(estatura), cumpleaños, rowid, genero);
                 clientes.add(cliente);
             } while (c.moveToNext());
         }
@@ -81,17 +82,18 @@ public class OrmHelper {
         GymAppSQLiteOpenHelper aux = new GymAppSQLiteOpenHelper(contexto);
         SQLiteDatabase db = aux.getReadableDatabase();
 
-        String sql = "SELECT nombre, apellido, identificacion, fecha_nacimiento, peso, altura, rowid FROM Clientes WHERE rowid = " + id + ";";
+        String sql = "SELECT nombre, apellido, identificacion, fecha_nacimiento, peso, altura, genero, rowid FROM Clientes WHERE rowid = " + id + ";";
         Cursor c = db.rawQuery(sql, null);
 
         if (c.moveToFirst()) {
             cliente.setNombre(c.getString(0));
             cliente.setApellido(c.getString(1));
-            cliente.setIdentificacion(Integer.parseInt(c.getString(2)));
+            cliente.setIdentificacion(c.getString(2));
             cliente.setFechaNacimiento(c.getString(3));
             cliente.setPeso(Integer.parseInt(c.getString(4)));
             cliente.setEstatura(Integer.parseInt(c.getString(5)));
-            cliente.setId(c.getInt(6));
+            cliente.setGenero(c.getInt(6));
+            cliente.setId(c.getInt(7));
         }
         db.close();
 
@@ -103,54 +105,58 @@ public class OrmHelper {
         GymAppSQLiteOpenHelper aux = new GymAppSQLiteOpenHelper(contexto);
         SQLiteDatabase db = aux.getReadableDatabase();
 
-        String sql = "SELECT nombre, apellido, identificacion, fecha_nacimiento, peso, altura, rowid FROM Entrenadores WHERE rowid = " + id + ";";
+        String sql = "SELECT nombre, apellido, identificacion, fecha_nacimiento, peso, altura, genero, rowid FROM Entrenadores WHERE rowid = " + id + ";";
         Cursor c = db.rawQuery(sql, null);
 
         if (c.moveToFirst()) {
             entrenador.setNombre(c.getString(0));
             entrenador.setApellido(c.getString(1));
-            entrenador.setIdentificacion(Integer.parseInt(c.getString(2)));
+            entrenador.setIdentificacion(c.getString(2));
             entrenador.setFechaNacimiento(c.getString(3));
             entrenador.setPeso(Integer.parseInt(c.getString(4)));
             entrenador.setAltura(Integer.parseInt(c.getString(5)));
-            entrenador.setId(c.getInt(6));
+            entrenador.setGenero(c.getInt(6));
+            entrenador.setId(c.getInt(7));
         }
         db.close();
 
         return entrenador;
     }
 
-    public static Horario buscarHorarioPorId(Context context, int id) {
+    public static Sesion buscarHorarioPorId(Context context, int id) {
         SQLiteDatabase db;
-        Horario horario = new Horario();
+        Sesion sesion = new Sesion();
 
         GymAppSQLiteOpenHelper aux = new GymAppSQLiteOpenHelper(context);
         db = aux.getReadableDatabase();
 
-        String sql = "SELECT hora_inicio, hora_fin, rowid FROM Horarios WHERE rowid=" + id + ";";
+        String sql = "SELECT hora_inicio, hora_fin, cliente_id, entrenador_id, completada, rowid FROM Sesiones WHERE rowid=" + id + ";";
 
         Cursor c = db.rawQuery(sql, null);
 
         if (c.moveToFirst()) {
-            horario.setHoraInicio(c.getInt(0));
-            horario.setHoraFin(c.getInt(1));
-            horario.setId(c.getInt(2));
+            sesion.setHoraInicio(c.getInt(0));
+            sesion.setHoraFin(c.getInt(1));
+            sesion.setCliente(buscarClientePorId(context, c.getInt(2)));
+            sesion.setEntrenador(buscarEntrenadorPorId(context, c.getInt(3)));
+            sesion.setCompletada(c.getInt(4));
+            sesion.setId(c.getInt(5));
         }
 
         db.close();
-        return horario;
+        return sesion;
     }
 
-    public static List<Horario> traerHorarios(Context context) {
+    public static List<Sesion> traerSesiones(Context context) {
         SQLiteDatabase db;
-        int rowid, horaInicio, horaFin;
+        int rowid, horaInicio, horaFin, clienteId, entrenadorId, completada;
 
-        ArrayList<Horario> horarios = new ArrayList<>();
+        ArrayList<Sesion> sesiones = new ArrayList<>();
 
         GymAppSQLiteOpenHelper aux = new GymAppSQLiteOpenHelper(context);
         db = aux.getReadableDatabase();
 
-        String sql = "SELECT hora_inicio, hora_fin, rowid FROM Horarios";
+        String sql = "SELECT hora_inicio, hora_fin, cliente_id, entrenador_id, completada, rowid FROM Sesiones";
 
         Cursor c = db.rawQuery(sql, null);
 
@@ -158,13 +164,16 @@ public class OrmHelper {
             do {
                 horaInicio = c.getInt(0);
                 horaFin = c.getInt(1);
-                rowid = c.getInt(2);
-                Horario horario = new Horario(rowid, horaInicio, horaFin);
-                horarios.add(horario);
+                clienteId = c.getInt(2);
+                entrenadorId = c.getInt(3);
+                completada = c.getInt(4);
+                rowid = c.getInt(5);
+                Sesion sesion = new Sesion(rowid, horaInicio, horaFin, buscarClientePorId(context, clienteId), buscarEntrenadorPorId(context, entrenadorId), completada);
+                sesiones.add(sesion);
             } while (c.moveToNext());
         }
 
         db.close();
-        return horarios;
+        return sesiones;
     }
 }
