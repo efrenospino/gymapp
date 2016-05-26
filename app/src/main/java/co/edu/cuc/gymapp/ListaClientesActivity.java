@@ -1,7 +1,6 @@
 package co.edu.cuc.gymapp;
 
 import android.content.Intent;
-import android.os.Parcelable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,7 +10,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -19,7 +17,6 @@ import butterknife.ButterKnife;
 import co.edu.cuc.gymapp.db.OrmHelper;
 import co.edu.cuc.gymapp.model.Cliente;
 import co.edu.cuc.gymapp.view.ClienteAdaptador;
-import co.edu.cuc.gymapp.view.EntrenadorAdaptador;
 
 public class ListaClientesActivity extends AppCompatActivity implements ClienteAdaptador.OnClienteClickListener {
 
@@ -59,7 +56,7 @@ public class ListaClientesActivity extends AppCompatActivity implements ClienteA
         mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ListaClientesActivity.this, CrearClienteActivity.class));
+                startActivity(new Intent(ListaClientesActivity.this, FormularioClienteActivity.class));
                 finish();
             }
         });

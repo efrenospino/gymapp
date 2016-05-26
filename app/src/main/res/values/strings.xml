@@ -27,9 +27,18 @@
     <string name="cancelar">CANCELAR</string>
     <string name="crear_cliente">Nuevo Cliente</string>
     <string name="cliente_guardado">Cliente guardado!</string>
+    <string name="entrenador_guardado">Entrenador guardado!</string>
     <string name="editar">Editar</string>
     <string name="eliminar">ELIMINAR</string>
     <string name="confirmacion">Confirmación</string>
     <string name="seguro_de_eliminar">¿Está seguro(a) de eliminar el elemento?</string>
     <string name="editar_cliente">Editar Cliente</string>
+    <string name="editar_entrenador">Editar Entrenador</string>
+    <string name="crear_entrenador">Nuevo Entrenador</string>
+    <string name="hora_inicio">Inicio</string>
+    <string name="hora_fin">Fin</string>
+    <string name="horarios">Horarios</string>
+    <string name="crear_horario">Nuevo Horario</string>
+    <string name="editar_horario">Editar Horario</string>
+    <string name="horario_guardado">Horario Guardado!</string>
 </resources>

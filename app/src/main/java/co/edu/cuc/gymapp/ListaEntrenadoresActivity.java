@@ -1,5 +1,7 @@
 package co.edu.cuc.gymapp;
 
+import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,12 +15,15 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import co.edu.cuc.gymapp.db.OrmHelper;
 import co.edu.cuc.gymapp.model.Entrenador;
 import co.edu.cuc.gymapp.view.EntrenadorAdaptador;
 
 
 public class ListaEntrenadoresActivity extends AppCompatActivity implements EntrenadorAdaptador.OnEntrenadorClickListener {
 
+    @BindView(R.id.irAgregarEntrenadorButton)
+    FloatingActionButton mFloatingActionButton;
     @BindView(R.id.listaEntrenadoresToolbar)
     Toolbar mToolbar;
     @BindView(R.id.listaEntrenadoresRecyclerView)
@@ -32,9 +37,7 @@ public class ListaEntrenadoresActivity extends AppCompatActivity implements Entr
 
         ButterKnife.bind(this);
 
-        for (int i = 0; i < 10; i++) {
-            mEntrenadores.add(new Entrenador(i, "First", "Last", i, i, new Date()));
-        }
+        mEntrenadores = OrmHelper.traerEntrenadores(this);
 
         mToolbar.setTitle(R.string.entrenadores);
         setSupportActionBar(mToolbar);
@@ -51,11 +54,23 @@ public class ListaEntrenadoresActivity extends AppCompatActivity implements Entr
         ((LinearLayoutManager) mRecyclerView.getLayoutManager()).setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setAdapter(new EntrenadorAdaptador(this, this, mEntrenadores));
 
+        mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ListaEntrenadoresActivity.this, FormularioEntrenadorActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+
     }
 
     @Override
     public void OnEntrenadorItemClickListener(Integer position) {
-
+        Intent i = new Intent(this, DetalleEntrenadorActivity.class);
+        i.putExtra("ENTRENADOR_ID", mEntrenadores.get(position).getId());
+        startActivity(i);
+        finish();
     }
 
     @Override

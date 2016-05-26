@@ -35,7 +35,7 @@ public class EntrenadorAdaptador extends RecyclerView.Adapter<EntrenadorAdaptado
     @Override
     public void onBindViewHolder(final HomeItemViewHolder holder, final int position) {
         holder.mLargeTextView.setText(mEntrenadores.get(position).getNombre() + " " + mEntrenadores.get(position).getApellido());
-        holder.mMediumTextView.setText(String.valueOf(mEntrenadores.get(position).getIdentificationNumber()));
+        holder.mMediumTextView.setText(String.valueOf(mEntrenadores.get(position).getIdentificacion()));
         holder.mSmallTextView.setText(mEntrenadores.get(position).getAltura() + "cm - " + mEntrenadores.get(position).getPeso() + "Kg");
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

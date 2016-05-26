@@ -44,6 +44,7 @@ public class PrincipalActivity extends AppCompatActivity implements PrincipalAda
                 startActivity(new Intent(this, ListaClientesActivity.class));
                 break;
             default:
+                startActivity(new Intent(this, ListaHorariosActivity.class));
                 break;
         }
     }

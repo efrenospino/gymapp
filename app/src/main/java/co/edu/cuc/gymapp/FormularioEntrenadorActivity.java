@@ -17,14 +17,14 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import co.edu.cuc.gymapp.db.OrmHelper;
-import co.edu.cuc.gymapp.model.Cliente;
+import co.edu.cuc.gymapp.model.Entrenador;
 
-public class CrearClienteActivity extends AppCompatActivity {
+public class FormularioEntrenadorActivity extends AppCompatActivity {
 
     @BindView(R.id.crearClienteToolbar)
     Toolbar mToolbar;
     @BindView(R.id.btnAgregarCliente)
-    Button mCreatClienteButton;
+    Button mCrearEntrenador;
     @BindView(R.id.btnCancelarCliente)
     Button mCancelarButton;
     @BindView(R.id.btnLimpiarCliente)
@@ -44,28 +44,29 @@ public class CrearClienteActivity extends AppCompatActivity {
 
     private int year, month, day;
     static final int DATE_DIALOG_ID = 999;
-    private Cliente mCliente = new Cliente();
+    private Entrenador mEntrenador = new Entrenador();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_crear_cliente);
+        setContentView(R.layout.activity_formulario_usuario);
 
         ButterKnife.bind(this);
 
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         if (getIntent().getExtras() != null) {
 
-            int clienteID = (int) getIntent().getExtras().get("CLIENTE_ID");
-            mCliente = OrmHelper.buscarClientePorId(this, clienteID);
+            int entrenadorID = (int) getIntent().getExtras().get("ENTRENADOR_ID");
+            mEntrenador = OrmHelper.buscarEntrenadorPorId(this, entrenadorID);
             rellenarFormulario();
-            mToolbar.setTitle(R.string.editar_cliente);
 
-            mToolbar.setTitle(R.string.crear_cliente);
+            mToolbar.setTitle(R.string.editar_entrenador);
 
-            mCreatClienteButton.setOnClickListener(new View.OnClickListener() {
+            setSupportActionBar(mToolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+            mCrearEntrenador.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     actualizar();
@@ -74,8 +75,8 @@ public class CrearClienteActivity extends AppCompatActivity {
             mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(CrearClienteActivity.this, DetalleUsuarioActivity.class);
-                    i.putExtra("CLIENTE_ID", mCliente.getId());
+                    Intent i = new Intent(FormularioEntrenadorActivity.this, DetalleEntrenadorActivity.class);
+                    i.putExtra("ENTRENADOR_ID", mEntrenador.getId());
                     startActivity(i);
                     finish();
                 }
@@ -84,16 +85,20 @@ public class CrearClienteActivity extends AppCompatActivity {
             mCancelarButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(CrearClienteActivity.this, DetalleUsuarioActivity.class);
-                    i.putExtra("CLIENTE_ID", mCliente.getId());
+                    Intent i = new Intent(FormularioEntrenadorActivity.this, DetalleEntrenadorActivity.class);
+                    i.putExtra("ENTRENADOR_ID", mEntrenador.getId());
                     startActivity(i);
                     finish();
                 }
             });
 
         } else {
-            mToolbar.setTitle(R.string.crear_cliente);
-            mCreatClienteButton.setOnClickListener(new View.OnClickListener() {
+            mToolbar.setTitle(R.string.crear_entrenador);
+
+            setSupportActionBar(mToolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+            mCrearEntrenador.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     guardar();
@@ -136,32 +141,32 @@ public class CrearClienteActivity extends AppCompatActivity {
         peso = mPesoTextView.getText().toString().trim();
         estatura = mEstaturaTextView.getText().toString().trim();
 
-        mCliente.setNombre(nombre);
-        mCliente.setApellido(apellido);
-        mCliente.setPeso(Integer.parseInt(peso));
-        mCliente.setEstatura(Integer.parseInt(estatura));
-        mCliente.setFechaNacimiento(cumpleaños);
+        mEntrenador.setNombre(nombre);
+        mEntrenador.setApellido(apellido);
+        mEntrenador.setPeso(Integer.parseInt(peso));
+        mEntrenador.setAltura(Integer.parseInt(estatura));
+        mEntrenador.setFechaNacimiento(cumpleaños);
 
-        mCliente.editar(this);
+        mEntrenador.editar(this);
 
-        Toast.makeText(this, getString(R.string.cliente_guardado), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.entrenador_guardado), Toast.LENGTH_SHORT).show();
 
-        Intent i = new Intent(this, DetalleUsuarioActivity.class);
-        i.putExtra("CLIENTE_ID", mCliente.getId());
+        Intent i = new Intent(this, DetalleEntrenadorActivity.class);
+        i.putExtra("ENTRENADOR_ID", mEntrenador.getId());
         startActivity(i);
         finish();
     }
 
     private void rellenarFormulario() {
-        mNombreTextView.setText(mCliente.getNombre());
-        mApellidoTextView.setText(mCliente.getApellido());
+        mNombreTextView.setText(mEntrenador.getNombre());
+        mApellidoTextView.setText(mEntrenador.getApellido());
 
-        mCedulaTextView.setText(String.valueOf(mCliente.getIdentificacion()));
+        mCedulaTextView.setText(String.valueOf(mEntrenador.getIdentificacion()));
         mCedulaTextView.setEnabled(false);
 
-        mFechaNacimientoTextView.setText(mCliente.getFechaNacimiento());
-        mPesoTextView.setText(String.valueOf(mCliente.getPeso()));
-        mEstaturaTextView.setText(String.valueOf(mCliente.getEstatura()));
+        mFechaNacimientoTextView.setText(mEntrenador.getFechaNacimiento());
+        mPesoTextView.setText(String.valueOf(mEntrenador.getPeso()));
+        mEstaturaTextView.setText(String.valueOf(mEntrenador.getAltura()));
     }
 
     private DatePickerDialog.OnDateSetListener datePickerListener
@@ -190,19 +195,19 @@ public class CrearClienteActivity extends AppCompatActivity {
         peso = mPesoTextView.getText().toString().trim();
         estatura = mEstaturaTextView.getText().toString().trim();
 
-        Cliente c = new Cliente(Integer.valueOf(cedula), nombre, apellido,
+        Entrenador c = new Entrenador(Integer.valueOf(cedula), nombre, apellido,
                 Integer.valueOf(peso), Integer.valueOf(estatura), cumpleaños, 0);
 
         c.guardar(this);
 
-        Toast.makeText(this, getString(R.string.cliente_guardado), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.entrenador_guardado), Toast.LENGTH_SHORT).show();
 
         onBackPressed();
     }
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(this, ListaClientesActivity.class));
+        startActivity(new Intent(this, ListaEntrenadoresActivity.class));
         finish();
     }
 

@@ -27,9 +27,17 @@
         </activity>
         <activity android:name=".ListaClientesActivity">
         </activity>
-        <activity android:name=".CrearClienteActivity">
+        <activity android:name=".FormularioClienteActivity">
         </activity>
         <activity android:name=".DetalleUsuarioActivity">
+        </activity>
+        <activity android:name=".FormularioEntrenadorActivity">
+        </activity>
+        <activity android:name=".DetalleEntrenadorActivity">
+        </activity>
+        <activity android:name=".ListaHorariosActivity">
+        </activity>
+        <activity android:name=".CrearHorarioActivity">
         </activity>
     </application>
 
